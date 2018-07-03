@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">McCollins</string>
+    <string name="your_email">your email</string>
+    <string name="your_password">your password</string>
+    <string name="your_birth_date">your birth date</string>
+    <string name="your_mobile_number">your mobile number</string>
+    <string name="your_last_name">your last name</string>
+    <string name="your_first_name">your first name</string>
+    <string name="please_fill_details">Please fill details</string>
+    <string name="title_activity_web">WebActivity</string>
+    <string name="your_username">your username</string>
+    <string name="login">Login</string>
+</resources>
