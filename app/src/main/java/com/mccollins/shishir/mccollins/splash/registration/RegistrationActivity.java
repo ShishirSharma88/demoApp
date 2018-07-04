@@ -25,7 +25,6 @@ public class RegistrationActivity extends Activity implements RegistrationView, 
     private ProgressBar progressBar;
     private RegistrationPresenterImpl registrationpresenterImpl;
     private Button registerButton;
-    private DateInputMask dateInputMask;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +36,7 @@ public class RegistrationActivity extends Activity implements RegistrationView, 
         lastnameEditText = (EditText) findViewById(R.id.edittext_lastname);
         mobileNumberEditText = (EditText) findViewById(R.id.edittext_mobile_number);
         dateOfBirthEditText = (EditText) findViewById(R.id.edittext_date_of_birth);
-        dateInputMask = new DateInputMask(dateOfBirthEditText);
+        DateInputMask dateInputMask = new DateInputMask(dateOfBirthEditText);
         genderRadioGroup = (RadioGroup) findViewById(R.id.radiobutton_gender);
         emailEditText = (EditText) findViewById(R.id.edittext_email);
         passwordEditText = (EditText) findViewById(R.id.edittext_password);

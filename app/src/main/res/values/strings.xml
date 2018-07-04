@@ -10,4 +10,9 @@
     <string name="title_activity_web">WebActivity</string>
     <string name="your_username">your username</string>
     <string name="login">Login</string>
+    <string name="mccollins">Mccollins</string>
+    <string name="not_registered_yet_click_here">Not Registered yet! click here!</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="register_me">Register Me!</string>
 </resources>

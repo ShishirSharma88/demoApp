@@ -60,14 +60,14 @@ public class RegistrationPresenterImpl implements RegistrationPresenter {
         }
     }
 
-    public void requestForRegistration(String url,
-                                       String firstName,
-                                       String lastName,
-                                       String email,
-                                       String password,
-                                       String mobileNumber,
-                                       String dateOfBirth,
-                                       String gender) throws JSONException {
+    private void requestForRegistration(String url,
+                                        String firstName,
+                                        String lastName,
+                                        String email,
+                                        String password,
+                                        String mobileNumber,
+                                        String dateOfBirth,
+                                        String gender) throws JSONException {
         JSONObject object = new JSONObject();
 
         object.put("fname", firstName);

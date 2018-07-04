@@ -47,16 +47,14 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view_three"
             android:layout_weight="1"
-            android:background="#FFDAB9"/>
+            android:background="@color/peach"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/view_four"
             android:layout_weight="1"
-            android:background="#FFEFD5"/>
+            android:background="@color/light_peach"/>
 
         <View
             android:layout_width="wrap_content"

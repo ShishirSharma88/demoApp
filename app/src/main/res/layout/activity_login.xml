@@ -39,7 +39,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mccollins"
+        android:text="@string/mccollins"
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="40sp"
         android:textStyle="bold|italic"
@@ -102,7 +102,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="Not Registered yet! click here!"
+        android:text="@string/not_registered_yet_click_here"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
         android:textColor="@color/colorAccent"
         app:layout_constraintLeft_toLeftOf="parent"

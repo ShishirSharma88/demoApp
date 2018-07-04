@@ -3,7 +3,6 @@ package com.mccollins.shishir.mccollins.splash.api;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.view.View;
 
 import com.mccollins.shishir.mccollins.splash.listener.TaskListener;
 
@@ -21,9 +20,9 @@ class RequestExecutor extends AsyncTask<Void, Void, String> {
     private String requestUrl;
     private JSONObject params;
 
-    protected RequestExecutor(@NonNull String requestUrl,
-                              @NonNull TaskListener taskListener,
-                              @NonNull JSONObject params) {
+    RequestExecutor(@NonNull String requestUrl,
+                    @NonNull TaskListener taskListener,
+                    @NonNull JSONObject params) {
         this.requestUrl = requestUrl;
         this.taskListener = taskListener;
         this.params = params;

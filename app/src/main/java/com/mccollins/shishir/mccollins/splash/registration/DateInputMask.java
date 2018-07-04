@@ -5,15 +5,15 @@ import android.text.TextWatcher;
 import android.widget.EditText;
 
 import java.util.Calendar;
+import java.util.Locale;
 
 public class DateInputMask implements TextWatcher {
 
     private String current = "";
-    private String ddmmyyyy = "DDMMYYYY";
     private Calendar cal = Calendar.getInstance();
     private EditText input;
 
-    public DateInputMask(EditText input) {
+    DateInputMask(EditText input) {
         this.input = input;
         this.input.addTextChangedListener(this);
     }
@@ -41,6 +41,7 @@ public class DateInputMask implements TextWatcher {
         if (clean.equals(cleanC)) sel--;
 
         if (clean.length() < 8) {
+            String ddmmyyyy = "DDMMYYYY";
             clean = clean + ddmmyyyy.substring(clean.length());
         } else {
             //This part makes sure that when we finish entering numbers
@@ -58,7 +59,7 @@ public class DateInputMask implements TextWatcher {
             //would be automatically corrected to 28/02/2012
 
             day = (day > cal.getActualMaximum(Calendar.DATE)) ? cal.getActualMaximum(Calendar.DATE) : day;
-            clean = String.format("%02d%02d%02d", day, mon, year);
+            clean = String.format(Locale.US, "%02d%02d%02d", day, mon, year);
         }
 
         clean = String.format("%s-%s-%s", clean.substring(0, 2),

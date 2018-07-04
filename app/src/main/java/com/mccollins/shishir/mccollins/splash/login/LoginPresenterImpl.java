@@ -16,7 +16,6 @@ import org.json.JSONObject;
 public class LoginPresenterImpl implements LoginPresenter {
 
     private LoginView loginView;
-    private DataManager dataManager;
 
     LoginPresenterImpl(LoginView loginView) {
         this.loginView = loginView;
@@ -47,7 +46,7 @@ public class LoginPresenterImpl implements LoginPresenter {
             object.put("email", username);
             object.put("password", password);
 
-            dataManager = new DataManager(this);
+            DataManager dataManager = new DataManager(this);
             dataManager.callApi(Utility.LOGIN_URL, object);
 
         } catch (JSONException ex) {

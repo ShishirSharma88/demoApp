@@ -14,14 +14,11 @@ import com.mccollins.shishir.mccollins.splash.model.MainData;
 import com.mccollins.shishir.mccollins.splash.model.SingleShotLocationProvider;
 import com.mccollins.shishir.mccollins.splash.utility.Utility;
 
-import java.util.ArrayList;
-
 public class HomeActivity extends Activity implements HomeView {
 
     private RecyclerView touristPlaceList;
     private HomePresenterImpl homePresenterImpl;
     private ProgressBar progressBar;
-    private RecyclerView.LayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +26,7 @@ public class HomeActivity extends Activity implements HomeView {
         setContentView(R.layout.activity_home);
 
         touristPlaceList = (RecyclerView) findViewById(R.id.recycler_placelist);
-        layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         touristPlaceList.setLayoutManager(layoutManager);
 
         progressBar = (ProgressBar) findViewById(R.id.progress_tourlist);

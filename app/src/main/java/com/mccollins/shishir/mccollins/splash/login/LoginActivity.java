@@ -14,7 +14,6 @@ import android.widget.Toast;
 import com.mccollins.shishir.mccollins.R;
 import com.mccollins.shishir.mccollins.splash.utility.Utility;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

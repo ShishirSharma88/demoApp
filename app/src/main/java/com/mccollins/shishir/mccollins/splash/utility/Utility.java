@@ -1,6 +1,5 @@
 package com.mccollins.shishir.mccollins.splash.utility;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
@@ -12,7 +11,7 @@ public final class Utility {
     public static String TOUR_LIST = "http://mccollinsmedia.com/myproject/service/listAttractions";
     public static String UPDATE_USER = "http://mccollinsmedia.com/myproject/service/updateUser";
 
-    public static Utility utility;
+    private static Utility utility;
 
     public static Utility getInstance() {
         if (utility == null) {
@@ -37,7 +36,7 @@ public final class Utility {
         ConnectivityManager cm =
                 (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        return cm.getActiveNetworkInfo() != null &&
+        return (cm != null ? cm.getActiveNetworkInfo() : null) != null &&
                 cm.getActiveNetworkInfo().isConnectedOrConnecting();
     }
 

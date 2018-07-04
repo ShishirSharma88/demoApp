@@ -1,6 +1,5 @@
 package com.mccollins.shishir.mccollins.splash.login;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 public interface LoginView {

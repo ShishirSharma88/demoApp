@@ -44,14 +44,13 @@ public class SplashActivity extends Activity implements SplashView, ActivityComp
     }
 
     @Override
-    public void checkForPermissons() {
+    public void checkForPermissions() {
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.CALL_PHONE, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 1);
-            return;
         } else {
             splashImplementaion.nowContinue();
         }
@@ -60,7 +59,6 @@ public class SplashActivity extends Activity implements SplashView, ActivityComp
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        boolean allGranted = false;
 
         for (int permission : grantResults) {
             if (permission != PackageManager.PERMISSION_GRANTED) {
@@ -70,13 +68,11 @@ public class SplashActivity extends Activity implements SplashView, ActivityComp
             }
         }
 
-        if (allGranted) {
-            splashImplementaion.nowContinue();
-        }
+        splashImplementaion.nowContinue();
     }
 
     @Override
     public void onBackPressed() {
-
+        // we donot want the user to back on splash screen
     }
 }

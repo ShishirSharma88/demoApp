@@ -2,7 +2,6 @@ package com.mccollins.shishir.mccollins.splash.api;
 
 import android.location.Location;
 import android.support.annotation.NonNull;
-import android.util.Log;
 
 import com.mccollins.shishir.mccollins.splash.base.BaseInteractor;
 import com.mccollins.shishir.mccollins.splash.base.BasePresenter;
@@ -25,6 +24,7 @@ public class DataManager implements BaseInteractor, TaskListener, SingleShotLoca
         location = new Location("");
     }
 
+    // kept for future use for profile section due to time shortage it has not been done yet
     public void requestForUpdateProfile(String url,
                                         String firstName,
                                         String lastName,
@@ -47,6 +47,7 @@ public class DataManager implements BaseInteractor, TaskListener, SingleShotLoca
 
     }
 
+    // kept for future use for profile section due to time shortage it has not been done yet
     public void requestForGetProfile(String url,
                                      String email) throws JSONException {
         JSONObject object = new JSONObject();
@@ -78,7 +79,7 @@ public class DataManager implements BaseInteractor, TaskListener, SingleShotLoca
 
     @Override
     public void onNewLocationAvailable(SingleShotLocationProvider.GPSCoordinates location) {
-        this.location.setLatitude(location.latitude);
-        this.location.setLongitude(location.longitude);
+        DataManager.location.setLatitude(location.latitude);
+        DataManager.location.setLongitude(location.longitude);
     }
 }

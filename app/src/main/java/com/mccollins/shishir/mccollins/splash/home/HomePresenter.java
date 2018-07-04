@@ -1,6 +1,5 @@
 package com.mccollins.shishir.mccollins.splash.home;
 
-import android.content.Context;
 import android.location.Location;
 
 import com.mccollins.shishir.mccollins.splash.base.BasePresenter;

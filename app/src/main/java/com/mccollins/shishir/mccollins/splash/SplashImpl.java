@@ -1,10 +1,7 @@
 package com.mccollins.shishir.mccollins.splash;
 
-import android.content.Intent;
-
 import com.mccollins.shishir.mccollins.splash.home.HomeActivity;
 import com.mccollins.shishir.mccollins.splash.login.LoginActivity;
-import com.mccollins.shishir.mccollins.splash.registration.RegistrationActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,7 +17,7 @@ public class SplashImpl implements SplashPresenter {
 
     @Override
     public void screenToCall() {
-        splashView.checkForPermissons();
+        splashView.checkForPermissions();
     }
 
     @Override
