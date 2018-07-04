@@ -1,18 +1,12 @@
 package com.mccollins.shishir.mccollins.splash.home;//package com.retro.shishir.retro.adapter;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,20 +15,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.mccollins.shishir.mccollins.R;
-import com.mccollins.shishir.mccollins.splash.api.SingleShotLocationProvider;
-import com.mccollins.shishir.mccollins.splash.listener.TaskListener;
 import com.mccollins.shishir.mccollins.splash.model.MainData;
 import com.mccollins.shishir.mccollins.splash.web.WebActivity;
 import com.squareup.picasso.Picasso;
-
-import java.security.Provider;
-import java.util.ArrayList;
 
 public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.TourViewHolder> {
 
     private Context context;
     private MainData tourPlacesList;
     private LocationManager locationManager;
+    private HomePresenterImpl homePresenterImpl;
 
     public static class TourViewHolder extends RecyclerView.ViewHolder {
         LinearLayout tourLayout;
@@ -56,35 +46,23 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.TourVi
         }
     }
 
-    public TourListAdapter(MainData mainData, Context context) {
+    public TourListAdapter(MainData mainData, Context context, HomePresenterImpl homePresenterImpl) {
         this.tourPlacesList = mainData;
         this.context = context;
+        this.homePresenterImpl = homePresenterImpl;
     }
 
     float getDistance(final String lat, final String lng) {
 
         final float[] distance = new float[1];
-        try {
-            SingleShotLocationProvider.requestSingleUpdate(context,
-                    new SingleShotLocationProvider.LocationCallback() {
-                        @Override
-                        public void onNewLocationAvailable(SingleShotLocationProvider.GPSCoordinates location) {
-                            Log.d("Location", "my location is " + location.toString());
-                            Location location1 = new Location("");
-                            location1.setLatitude(Double.parseDouble(lat));
-                            location1.setLongitude(Double.parseDouble(lng));
 
-                            Location location2 = new Location("");
+        Location location1 = new Location("");
+        location1.setLatitude(Double.parseDouble(lat));
+        location1.setLongitude(Double.parseDouble(lng));
 
-                            location2.setLatitude(location.latitude);
-                            location2.setLongitude(location.longitude);
-                            distance[0] = location1.distanceTo(location2);
-                        }
-                    });
+        Location location2 = homePresenterImpl.getLocation();
+        distance[0] = location1.distanceTo(location2);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         return distance[0];
     }
 
@@ -103,24 +81,24 @@ public class TourListAdapter extends RecyclerView.Adapter<TourListAdapter.TourVi
 
         holder.phoneNumberTextView.setText("Call: " + tourPlacesList.getData().get(position).getContact());
         holder.phoneNumberTextView.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("MissingPermission")
             @Override
             public void onClick(View v) {
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
                 callIntent.setData(Uri.parse("tel:" + tourPlacesList.getData().get(position).getContact().trim()));
-
-                if (ActivityCompat.checkSelfPermission(context,
-                        Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions((HomeActivity) context,
-                            new String[]{Manifest.permission.CALL_PHONE}, 1);
-                    return;
-                }
                 context.startActivity(callIntent);
             }
         });
 
-        holder.distanceTextView.setText("Distance: "
-                + getDistance(tourPlacesList.getData().get(position).getLatitude(),
-                tourPlacesList.getData().get(position).getLongitude()));
+        new android.os.Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                holder.distanceTextView.setText("Distance: "
+                        + getDistance(tourPlacesList.getData().get(position).getLatitude(),
+                        tourPlacesList.getData().get(position).getLongitude()));
+
+            }
+        }, 1000);
 
         holder.tourLayout.setOnClickListener(new View.OnClickListener() {
             @Override

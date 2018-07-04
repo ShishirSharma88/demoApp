@@ -65,11 +65,12 @@ class RequestExecutor extends AsyncTask<Void, Void, String> {
     }
 
     protected void onPostExecute(String response) {
-        Log.i("INFO", response);
+
 
         if (response == null) {
             taskListener.onFailure(0);
         } else {
+            Log.i("INFO", response);
             taskListener.onSuccess(response);
         }
 

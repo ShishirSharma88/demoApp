@@ -9,7 +9,10 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.mccollins.shishir.mccollins.R;
+import com.mccollins.shishir.mccollins.splash.api.DataManager;
 import com.mccollins.shishir.mccollins.splash.model.MainData;
+import com.mccollins.shishir.mccollins.splash.model.SingleShotLocationProvider;
+import com.mccollins.shishir.mccollins.splash.utility.Utility;
 
 import java.util.ArrayList;
 
@@ -32,7 +35,7 @@ public class HomeActivity extends Activity implements HomeView {
         progressBar = (ProgressBar) findViewById(R.id.progress_tourlist);
 
         homePresenterImpl = new HomePresenterImpl(this);
-        homePresenterImpl.doCallApi(this);
+        homePresenterImpl.doCallApi();
     }
 
     @Override
@@ -57,7 +60,17 @@ public class HomeActivity extends Activity implements HomeView {
     }
 
     @Override
+    public String getEmail() {
+        return Utility.getInstance().getPrefs("email", this);
+    }
+
+    @Override
     public void setList(MainData mainData) {
-        touristPlaceList.setAdapter(new TourListAdapter(mainData, this));
+        touristPlaceList.setAdapter(new TourListAdapter(mainData, this, homePresenterImpl));
+    }
+
+    @Override
+    public void prepareForCurrentLocation(DataManager dataManager) {
+        SingleShotLocationProvider.requestSingleUpdate(this, dataManager);
     }
 }

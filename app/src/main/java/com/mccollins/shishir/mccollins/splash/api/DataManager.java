@@ -1,24 +1,28 @@
 package com.mccollins.shishir.mccollins.splash.api;
 
+import android.location.Location;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.mccollins.shishir.mccollins.splash.base.BaseInteractor;
 import com.mccollins.shishir.mccollins.splash.base.BasePresenter;
 import com.mccollins.shishir.mccollins.splash.listener.TaskListener;
+import com.mccollins.shishir.mccollins.splash.model.SingleShotLocationProvider;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class DataManager implements BaseInteractor, TaskListener {
+public class DataManager implements BaseInteractor, TaskListener, SingleShotLocationProvider.LocationCallback {
 
     private BasePresenter basePresenter;
     private RequestExecutor requestExecutor;
     private TaskListener taskListener;
+    private static Location location;
 
     public DataManager(BasePresenter basePresenter) {
         this.basePresenter = basePresenter;
         taskListener = this;
+        location = new Location("");
     }
 
     public void requestForUpdateProfile(String url,
@@ -65,5 +69,16 @@ public class DataManager implements BaseInteractor, TaskListener {
     public void callApi(String url, JSONObject object) {
         requestExecutor = new RequestExecutor(url, taskListener, object);
         requestExecutor.execute();
+    }
+
+    @Override
+    public Location getCurrentLocation() {
+        return location;
+    }
+
+    @Override
+    public void onNewLocationAvailable(SingleShotLocationProvider.GPSCoordinates location) {
+        this.location.setLatitude(location.latitude);
+        this.location.setLongitude(location.longitude);
     }
 }

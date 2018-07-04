@@ -1,10 +1,9 @@
 package com.mccollins.shishir.mccollins.splash.home;
 
-import android.content.Context;
+import android.location.Location;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import com.mccollins.shishir.mccollins.splash.api.DataManager;
 import com.mccollins.shishir.mccollins.splash.model.MainData;
 import com.mccollins.shishir.mccollins.splash.utility.Utility;
@@ -22,27 +21,26 @@ public class HomePresenterImpl implements HomePresenter {
     }
 
     @Override
-    public void doCallApi(Context context) {
+    public void doCallApi() {
+        homeView.showProgress();
         dataManager = new DataManager(this);
-        requestForTourList(Utility.TOUR_LIST, Utility.getInstance().getPrefs("email", context));
+        homeView.prepareForCurrentLocation(dataManager);
+        try {
+            dataManager.callApi(Utility.TOUR_LIST, new JSONObject().put("email", homeView.getEmail()));
+        } catch (JSONException e) {
+            Log.e("doCallApi", e.toString());
+        }
     }
 
-    public void requestForTourList(String url,
-                                   String email) {
-        homeView.showProgress();
-        try {
-            JSONObject object = new JSONObject();
-            object.put("email", email);
-            dataManager.callApi(url, object);
-        } catch (JSONException ex) {
-            homeView.hideProgress();
-            Log.e("requestForTourList : ", ex.toString());
-        }
+    @Override
+    public Location getLocation() {
+        return dataManager.getCurrentLocation();
     }
 
     @Override
     public void response(Object object, boolean isSuccess) {
         homeView.hideProgress();
+
         if (object != null && isSuccess) {
             MainData mainData = new Gson().fromJson(object.toString(), MainData.class);
             homeView.setList(mainData);

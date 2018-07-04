@@ -16,23 +16,29 @@ public class SplashImpl implements SplashPresenter {
 
     SplashImpl(SplashView splashView) {
         this.splashView = splashView;
-        screenToCall();
     }
 
     @Override
     public void screenToCall() {
-        holdScreen(splashView.checkDataExist() ? HomeActivity.class : LoginActivity.class);
+        splashView.checkForPermissons();
     }
 
     @Override
     public void holdScreen(final Class activityToLaunch) {
-        timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                splashView.newScreen(activityToLaunch);
-            }
-        }, 5000);
+        if (timer == null) {
+            timer = new Timer();
+            timer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    splashView.newScreen(activityToLaunch);
+                }
+            }, 5000);
+        }
+    }
+
+    @Override
+    public void nowContinue() {
+        holdScreen(splashView.checkDataExist() ? HomeActivity.class : LoginActivity.class);
     }
 
     @Override
