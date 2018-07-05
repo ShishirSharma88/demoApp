@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.view.Window;
-import android.widget.Toast;
 
 import com.mccollins.shishir.mccollins.R;
 import com.mccollins.shishir.mccollins.splash.utility.Utility;
